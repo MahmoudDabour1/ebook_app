@@ -1,6 +1,7 @@
 import 'package:ebook_app/core/theming/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/theming/colors.dart';
 
@@ -18,9 +19,8 @@ class HomeTopBar extends StatelessWidget {
         ),
         CircleAvatar(
           radius: 24.0,
-          backgroundColor: ColorsManager.moreLighterGray,
           child: SvgPicture.asset(
-            "assets/svgs/notifications.svg",
+            "assets/svgs/notification.svg",
           ),
         ),
       ],

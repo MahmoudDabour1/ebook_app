@@ -7,6 +7,7 @@ import 'core/routing/routes.dart';
 
 class EbookApp extends StatelessWidget {
   final AppRouter appRouter;
+
   const EbookApp({super.key, required this.appRouter});
 
   @override
@@ -19,6 +20,7 @@ class EbookApp extends StatelessWidget {
         onGenerateRoute: appRouter.generateRoute,
         theme: ThemeData(
           primaryColor: ColorsManager.primaryColor,
+          scaffoldBackgroundColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
         initialRoute: Routes.homeScreen,

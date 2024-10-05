@@ -1,18 +1,14 @@
 import 'package:ebook_app/core/routing/app_router.dart';
 import 'package:ebook_app/ebook_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import 'core/di/dependency_injection.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return EbookApp(
-      appRouter: AppRouter(),
-    );
-  }
+void main() async{
+  setupGetIt();
+  await ScreenUtil.ensureScreenSize();
+  runApp(EbookApp(
+    appRouter: AppRouter(),
+  ));
 }

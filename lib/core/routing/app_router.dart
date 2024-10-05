@@ -1,15 +1,32 @@
+import 'package:ebook_app/core/di/dependency_injection.dart';
 import 'package:ebook_app/core/routing/routes.dart';
+import 'package:ebook_app/features/details_screen/logic/book_details_cubit.dart';
+import 'package:ebook_app/features/details_screen/ui/details_screen.dart';
+import 'package:ebook_app/features/home/logic/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/home/ui/home_screen.dart';
 
-class AppRouter{
-  Route? generateRoute(RouteSettings settings){
-    switch(settings.name){
+class AppRouter {
+  Route? generateRoute(RouteSettings settings) {
+    switch (settings.name) {
       case Routes.homeScreen:
-        return MaterialPageRoute(builder: (context) => HomeScreen());
-      // case Routes.detailsScreen:
-      //   return MaterialPageRoute(builder: (context) => DetailScreen());
+        return MaterialPageRoute(builder: (context) =>
+            BlocProvider(
+              create: (context) =>
+              HomeCubit(getIt())
+                ..getBestSellerList(),
+              child: HomeScreen(),
+            ));
+      case Routes.detailsScreen:
+        final bookId = settings.arguments as String;
+
+        return MaterialPageRoute(builder: (context) =>
+            BlocProvider(
+              create: (context) => BookDetailsCubit(getIt())..getBookDetails(bookId),
+              child: DetailsScreen(),
+            ));
       default:
         return null;
     }

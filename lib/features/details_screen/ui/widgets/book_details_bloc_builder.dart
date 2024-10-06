@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'book_details_images.dart';
+import 'book_details_shimmer_loading.dart';
 
 class BookDetailsBlocBuilder extends StatelessWidget {
   const BookDetailsBlocBuilder({super.key});
@@ -44,6 +45,6 @@ class BookDetailsBlocBuilder extends StatelessWidget {
   }
 
   Widget setupLoading() {
-    return const CircularProgressIndicator();
+    return const BooKDetailsShimmerLoading();
   }
 }

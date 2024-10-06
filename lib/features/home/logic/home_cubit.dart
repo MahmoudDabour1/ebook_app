@@ -1,6 +1,6 @@
 
 
-import 'package:ebook_app/core/helpers/app_constants.dart';
+import 'package:ebook_app/features/home/data/models/book_by_category_response_model.dart';
 import 'package:ebook_app/features/home/data/models/home_books_response_model.dart';
 
 import '../data/repos/home_repo.dart';
@@ -14,40 +14,50 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._homeRepo): super(const HomeState.initial());
 
   List<BookItems?>? bestSellerList = [];
-  bool isShimmer = false;
+  List<BookItemsByCategory?>? booksByCategoriesList = [];
 
   void getBestSellerList() async {
     emit(const HomeState.bestSellerLoading());
-    isShimmer = true;
     final response = await _homeRepo.getHomeData();
    response.when(
       success: (homeBooksResponseModel) {
-        isShimmer = false;
        bestSellerList = homeBooksResponseModel.items??[];
-        emit(HomeState.bestSellerSuccess(bestSellerList));
+            emit(HomeState.bestSellerSuccess(bestSellerList));
       },
       failure: (apiErrorModel) {
-        isShimmer = false;
-        emit(HomeState.bestSellerError(apiErrorModel));
+            emit(HomeState.bestSellerError(apiErrorModel));
       },
     );
   }
-
-  // void getFilterCategoriesList({required String category}) async {
-  //   emit(const HomeState.bestSellerLoading());
-  //   List<BookItems?>? filterCategoriesList = getBooksListByCategory(category);
-  //   final response = await _homeRepo.getHomeData();
-  //   response.when(
-  //     success: (homeBooksResponseModel) {
-  //       emit(HomeState.filterCategoriesSuccess(homeBooksResponseModel.items));
-  //     },
-  //     failure: (apiErrorModel) {
-  //       emit(HomeState.filterCategoriesError());
-  //     },
-  //   );
-  // }
-  //
-  // getBooksListByCategory( category) {
-  //   return bestSellerList?.firstWhere((element) => element?.volumeInfo?.categories?[0] == category)?.filterCategoriesList;
-  // }
+//getBookBtCategory
+  void getBooksListByCategory({required String category}) async {
+     emit(const HomeState.bookByCategoryLoading());
+     final response = await _homeRepo.getBooksByCategoryData(category: category);
+    response.when(
+      success: (bookByCategoryResponseModel) {
+        booksByCategoriesList = bookByCategoryResponseModel.items??[]; 
+          emit(HomeState.bookByCategorySuccess(booksByCategoriesList));
+      },
+      failure: (apiErrorModel) {
+           emit(HomeState.bookByCategoryError(apiErrorModel));
+      },
+    );
+  }
 }
+// void getFilterCategoriesList({required String category}) async {
+//   emit(const HomeState.bestSellerLoading());
+//   List<BookItems?>? filterCategoriesList = getBooksListByCategory(category);
+//   final response = await _homeRepo.getHomeData();
+//   response.when(
+//     success: (homeBooksResponseModel) {
+//       emit(HomeState.filterCategoriesSuccess(homeBooksResponseModel.items));
+//     },
+//     failure: (apiErrorModel) {
+//       emit(HomeState.filterCategoriesError());
+//     },
+//   );
+// }
+//
+// getBooksListByCategory( category) {
+//   return bestSellerList?.firstWhere((element) => element?.volumeInfo?.categories?[0] == category)?.filterCategoriesList;
+// }

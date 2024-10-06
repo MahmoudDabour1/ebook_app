@@ -21,4 +21,5 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<BookDetailsRepo>(() => BookDetailsRepo(getIt()));
   getIt
       .registerLazySingleton<BookDetailsCubit>(() => BookDetailsCubit(getIt()));
+
 }

@@ -1,4 +1,6 @@
+import 'package:ebook_app/features/home/logic/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/helpers/app_constants.dart';
@@ -34,12 +36,14 @@ class _CategoryListState extends State<CategoryList> {
             itemBuilder: (context, index) {
               return Padding(
                 padding:
-                    EdgeInsetsDirectional.only(start: index == 0 ? 0 : 8.w),
+                EdgeInsetsDirectional.only(start: index == 0 ? 0 : 8.w),
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
                       selectCategoryIndex = index;
                     });
+                    context.read<HomeCubit>().getBooksListByCategory(
+                        category: AppConstants.selectByCategory[index]);
                   },
                   child: CategoryListItem(
                     index: index,

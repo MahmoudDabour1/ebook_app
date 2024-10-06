@@ -1,4 +1,5 @@
 import 'package:ebook_app/core/networking/api_error_model.dart';
+import 'package:ebook_app/features/home/data/models/book_by_category_response_model.dart';
 import 'package:ebook_app/features/home/data/models/home_books_response_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,8 +14,9 @@ class HomeState with _$HomeState {
   const factory HomeState.bestSellerError(ApiErrorModel apiErrorModel) = BestSellerError;
 
   //categories
-  // const factory HomeState.filterCategoriesSuccess(List<BookItems?>? bookItem) = FilterCategoriesSuccess;
-  // const factory HomeState.filterCategoriesError() = FilterCategoriesError;
+  const factory HomeState.bookByCategoryLoading() = BookByCategoryLoading;
+  const factory HomeState.bookByCategorySuccess(List<BookItemsByCategory?>? bookItem) = BookByCategorySuccess;
+  const factory HomeState.bookByCategoryError(ApiErrorModel apiErrorModel) = BookByCategoryError;
 
 }
 

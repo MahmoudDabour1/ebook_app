@@ -1,25 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../core/helpers/spacing.dart';
-import '../../../../../core/theming/colors.dart';
-import '../../../logic/home_cubit.dart';
 
-class BestSellerShimmerLoading extends StatefulWidget {
+class BestSellerShimmerLoading extends StatelessWidget {
   const BestSellerShimmerLoading({super.key});
 
   @override
-  State<BestSellerShimmerLoading> createState() => _BestSellerShimmerLoadingState();
-}
-
-class _BestSellerShimmerLoadingState extends State<BestSellerShimmerLoading> {
-  @override
   Widget build(BuildContext context) {
-    bool isShimmer = context.read<HomeCubit>().isShimmer;
     return GridView.count(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -35,36 +25,34 @@ class _BestSellerShimmerLoadingState extends State<BestSellerShimmerLoading> {
           ),
           child: Column(
             children: [
-             Skeletonizer(
-               enabled: isShimmer,
-               child: Container(
+              Skeletonizer(
+                enabled: true,
+                child: Container(
                     width: 169.w,
                     height: 178.h,
-                   decoration: BoxDecoration(
-                     shape: BoxShape.rectangle,
-                     borderRadius: BorderRadius.circular(12.r),
-                     color: Colors.grey[100],
-
-                   )
-                  ),
-             ),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(12.r),
+                      color: Colors.grey[100],
+                    )),
+              ),
               verticalSpace(8),
               Skeletonizer(
-                enabled: isShimmer,
+                enabled: true,
                 child: Text(
                   'Book Title',
                 ),
               ),
               verticalSpace(4),
               Skeletonizer(
-                enabled: isShimmer,
+                enabled: true,
                 child: Text(
                   'Author Name',
                 ),
               ),
               verticalSpace(8),
               Skeletonizer(
-                enabled: isShimmer,
+                enabled: true,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.w),
                   child: Row(

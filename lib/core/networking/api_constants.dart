@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 
 class ApiConstants {
   static const String apiBaseUrl = "https://www.googleapis.com/books/v1/";
-  static const String bestSellerUrl = "volumes?q=Best Sellers&maxResults =15";
+  static const String bestSellerUrl = "volumes?q=Best Sellers&maxResults =30";
 }
 
 class ApiErrors {

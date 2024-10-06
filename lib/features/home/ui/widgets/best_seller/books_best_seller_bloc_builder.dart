@@ -22,12 +22,8 @@ class BooksBestSellerBlocBuilder extends StatelessWidget {
               var bestSellerList = bestSellerDataList;
               return setupSuccess(bestSellerList);
             },
-            bestSellerError: (errorHandler) {
-              return setupError();
-            },
-            bestSellerLoading: () {
-              return setupLoading(context);
-            },
+            bestSellerError: (errorHandler) => setupError(),
+            bestSellerLoading: () => setupLoading(),
             orElse: () => const SizedBox.shrink(),
           );
         });
@@ -43,7 +39,7 @@ class BooksBestSellerBlocBuilder extends StatelessWidget {
     return const SizedBox.shrink();
   }
 
-  Widget setupLoading(BuildContext context) {
-    return BestSellerShimmerLoading();
+  Widget setupLoading() {
+    return const BestSellerShimmerLoading();
   }
 }

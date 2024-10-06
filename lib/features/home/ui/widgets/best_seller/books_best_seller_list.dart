@@ -1,11 +1,8 @@
 import 'dart:developer';
 
-import 'package:ebook_app/core/routing/app_router.dart';
 import 'package:ebook_app/core/routing/routes.dart';
-import 'package:ebook_app/features/details_screen/logic/book_details_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../data/models/home_books_response_model.dart';
@@ -31,7 +28,7 @@ class _BooksBestSellerListState extends State<BooksBestSellerList> {
       mainAxisSpacing: 16.h,
       childAspectRatio: 1 / 1.8,
       children: List.generate(
-        widget.bestSellerBooks.length ?? 10,
+        widget.bestSellerBooks.length ,
         (index) => GestureDetector(
           onTap: () {
           log("Book ID: ${widget.bestSellerBooks[index]?.id}");

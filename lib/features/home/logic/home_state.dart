@@ -18,5 +18,12 @@ class HomeState with _$HomeState {
   const factory HomeState.bookByCategorySuccess(List<BookItemsByCategory?>? bookItem) = BookByCategorySuccess;
   const factory HomeState.bookByCategoryError(ApiErrorModel apiErrorModel) = BookByCategoryError;
 
+  //pagination
+
+  const factory HomeState.bestSellerPaginationLoading() = BestSellerPaginationLoading;
+  const factory HomeState.bestSellerPaginationError(ApiErrorModel apiErrorModel) = BestSellerPaginationError;
+  const factory HomeState.bookByCategoryPaginationLoading() = BookByCategoryPaginationLoading;
+  const factory HomeState.bookByCategoryPaginationError(ApiErrorModel apiErrorModel) = BookByCategoryPaginationError;
+
 }
 

@@ -19,7 +19,6 @@ class CategoryResponseListViewItem extends StatelessWidget {
         start: itemIndex == 0 ? 0 : 10.w,
       ),
       child: Container(
-        height: 200.h,
         width: 150.w,
         decoration: BoxDecoration(
           color: Colors.grey[100],

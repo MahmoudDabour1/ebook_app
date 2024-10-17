@@ -4,34 +4,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class SearchWidget extends StatelessWidget {
-  const SearchWidget({super.key});
+class SearchBarWidget extends StatelessWidget {
+ final bool enabled;
+ final void Function(String?)? onChanged;
 
+   const SearchBarWidget({super.key,  this.enabled = true, required this.onChanged});
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled:enabled ,
+      onChanged: onChanged,
       decoration: InputDecoration(
         fillColor: ColorsManager.lighterGray,
         filled: true,
-        hintText: '   Search for books',
+        hintText: '     Search for books',
         hintStyle: AppTextStyles.font18DarkBlueRegular,
         prefixIconConstraints: BoxConstraints(
-          maxHeight: 30.h,
-          maxWidth: 30.w,
+          maxHeight: 35.h,
+          maxWidth: 35.w,
         ),
-        prefixIcon:  SvgPicture.asset(
-          "assets/svgs/search.svg",
-          height: 20.h,
-          width: 20.w,
+        prefixIcon:  Padding(
+          padding: EdgeInsets.only(left: 12.w),
+          child: SvgPicture.asset(
+            "assets/svgs/search.svg",
+          ),
         ),
         suffixIconConstraints: BoxConstraints(
-          maxHeight: 30.h,
-          maxWidth: 30.w,
+          maxHeight: 40.h,
+          maxWidth: 40.w,
+
         ),
-        suffixIcon: SvgPicture.asset(
-          "assets/svgs/microphone2.svg",
-          height: 20.h,
-          width: 20.w,
+        suffixIcon: Padding(
+          padding: EdgeInsets.only(right: 12.w),
+          child: SvgPicture.asset(
+            "assets/svgs/microphone2.svg",
+          ),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(24.r),

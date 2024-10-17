@@ -68,7 +68,7 @@ class BooksBestSellerItem extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ),
-          verticalSpace(8),
+
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.w),
             child: Row(
@@ -77,6 +77,8 @@ class BooksBestSellerItem extends StatelessWidget {
                 Text(
                   '${bookItems?.saleInfo?.retailPrice?.amount ?? 'Free'} ${bookItems?.saleInfo?.retailPrice?.currencyCode ?? ''}',
                   style: AppTextStyles.font16DarkBlueSemiBold,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
                 CupertinoButton(
                   padding: EdgeInsets.zero,

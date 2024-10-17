@@ -2,7 +2,7 @@ import 'package:ebook_app/core/helpers/spacing.dart';
 import 'package:ebook_app/features/home/logic/home_cubit.dart';
 import 'package:ebook_app/features/home/ui/widgets/best_seller/books_best_seller.dart';
 import 'package:ebook_app/features/home/ui/widgets/home_top_bar.dart';
-import 'package:ebook_app/features/home/ui/widgets/search_widget.dart';
+import 'package:ebook_app/core/widgets/search_bar_widget.dart';
 import 'package:ebook_app/features/home/ui/widgets/select_by_category/books_by_category_bloc_builder.dart';
 import 'package:ebook_app/features/home/ui/widgets/select_by_category/category_list.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 const HomeTopBar(),
                 verticalSpace(16),
-                const SearchWidget(),
+                 SearchBarWidget(onChanged: (String ) {  },),
                 verticalSpace(24),
                 CategoryList(),
                 verticalSpace(16),

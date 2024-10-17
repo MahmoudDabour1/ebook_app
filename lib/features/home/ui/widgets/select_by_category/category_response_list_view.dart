@@ -26,7 +26,7 @@ class _CategoryResponseListViewState extends State<CategoryResponseListView> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200.h,
+      height: 210.h,
       child: NotificationListener<ScrollNotification>(
         onNotification: (notification) {
           if (notification.metrics.pixels ==

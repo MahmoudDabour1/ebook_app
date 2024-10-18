@@ -1,9 +1,7 @@
 import 'dart:developer';
 
 import 'package:ebook_app/core/routing/routes.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -26,42 +24,29 @@ class _BooksBestSellerListState extends State<BooksBestSellerList> {
   @override
   void initState() {
     super.initState();
-    scroll.addListener(() {
-      if (scroll.position.maxScrollExtent ==
-          scroll.offset ) {
-        HomeCubit cubit = BlocProvider.of(context);
-        cubit.getBestSellerList(fromPagination: true);
-      }
-    });
+    scroll.addListener(
+      () {
+        if (scroll.position.maxScrollExtent == scroll.offset) {
+          HomeCubit cubit = BlocProvider.of(context);
+          cubit.getBestSellerList(fromPagination: true);
+        }
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return
-      // NotificationListener<ScrollNotification>(
-      // onNotification: (notification) {
-      //   print(notification);
-      //   if (notification.metrics.pixels >=
-      //           notification.metrics.maxScrollExtent - 200 &&
-      //       notification is ScrollUpdateNotification) {
-      //     print("Load More");
-      //     HomeCubit cubit = BlocProvider.of(context);
-      //     cubit.getBestSellerList(fromPagination: true);
-      //   }
-      //   return true;
-      // },
-      // child:
-      GridView.builder(
-        shrinkWrap: true,
-        controller: scroll,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16.w,
-          mainAxisSpacing: 16.h,
-          childAspectRatio: 1 / 1.8,
-        ),
-        itemCount: widget.bestSellerBooks.length,
-        itemBuilder: (context, index) {
+    return GridView.builder(
+      controller: scroll,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 16.w,
+        mainAxisSpacing: 16.h,
+        childAspectRatio: 1 / 1.8,
+      ),
+      itemCount: widget.bestSellerBooks.length + 2,
+      itemBuilder: (context, index) {
+        if (index < widget.bestSellerBooks.length) {
           return GestureDetector(
             onTap: () {
               log("Book ID: ${widget.bestSellerBooks[index]?.id}");
@@ -75,7 +60,14 @@ class _BooksBestSellerListState extends State<BooksBestSellerList> {
               bookItems: widget.bestSellerBooks[index],
             ),
           );
-        },
-      );
+        } else {
+          return SizedBox(
+            height: 50,
+            width: 50,
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
+      },
+    );
   }
 }

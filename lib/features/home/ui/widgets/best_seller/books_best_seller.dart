@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'books_best_seller_bloc_builder.dart';
 
-
 class BooksBestSeller extends StatelessWidget {
   const BooksBestSeller({super.key});
 
@@ -18,7 +17,7 @@ class BooksBestSeller extends StatelessWidget {
           style: AppTextStyles.font18DarkBlueBold,
         ),
         verticalSpace(16),
-        const BooksBestSellerBlocBuilder(),
+        Expanded(child: const BooksBestSellerBlocBuilder()),
         // Add your code here
       ],
     );

@@ -38,30 +38,28 @@ class _HomeScreenState extends State<HomeScreen> {
             20.0.w,
             28.0.h,
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const HomeTopBar(),
-                verticalSpace(16),
-                GestureDetector(
-                  onTap: () {
-                    context.pushNamed(
-                      Routes.searchScreen,
-                    );
-                  },
-                  child: SearchBarWidget(
-                    enabled: false,
-                  ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const HomeTopBar(),
+              verticalSpace(16),
+              GestureDetector(
+                onTap: () {
+                  context.pushNamed(
+                    Routes.searchScreen,
+                  );
+                },
+                child: SearchBarWidget(
+                  enabled: false,
                 ),
-                verticalSpace(24),
-                CategoryList(),
-                verticalSpace(16),
-                BooksByCategoryBlocBuilder(),
-                verticalSpace(24),
-                BooksBestSeller(),
-              ],
-            ),
+              ),
+              verticalSpace(24),
+              CategoryList(),
+              verticalSpace(16),
+              BooksByCategoryBlocBuilder(),
+              verticalSpace(24),
+              Expanded(child: BooksBestSeller()),
+            ],
           ),
         ),
       ),

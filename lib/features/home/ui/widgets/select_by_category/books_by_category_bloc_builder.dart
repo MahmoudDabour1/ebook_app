@@ -24,9 +24,7 @@ class BooksByCategoryBlocBuilder extends StatelessWidget {
             },
             bookByCategoryLoading: () => setupLoading(),
             bookByCategoryError: (errorHandler) => setupError(),
-            bookByCategoryPaginationLoading: () => Center(
-              child: SizedBox(height:50,width: 50,child: CircularProgressIndicator()),
-            ),
+            bookByCategoryPaginationLoading: () => setupPaginationLoading(),
             orElse: () => const SizedBox.shrink(),
           );
         });
@@ -44,5 +42,12 @@ class BooksByCategoryBlocBuilder extends StatelessWidget {
 
   Widget setupLoading() {
     return const BooksByCategoryResponseShimmerLoading();
+  }
+
+  Widget setupPaginationLoading() {
+    return Center(
+      child:
+      SizedBox(height: 50, width: 50, child: CircularProgressIndicator()),
+    );
   }
 }

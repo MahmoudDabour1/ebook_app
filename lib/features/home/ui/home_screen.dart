@@ -1,8 +1,10 @@
+import 'package:ebook_app/core/helpers/extensions.dart';
 import 'package:ebook_app/core/helpers/spacing.dart';
+import 'package:ebook_app/core/routing/routes.dart';
+import 'package:ebook_app/core/widgets/search_bar_widget.dart';
 import 'package:ebook_app/features/home/logic/home_cubit.dart';
 import 'package:ebook_app/features/home/ui/widgets/best_seller/books_best_seller.dart';
 import 'package:ebook_app/features/home/ui/widgets/home_top_bar.dart';
-import 'package:ebook_app/core/widgets/search_bar_widget.dart';
 import 'package:ebook_app/features/home/ui/widgets/select_by_category/books_by_category_bloc_builder.dart';
 import 'package:ebook_app/features/home/ui/widgets/select_by_category/category_list.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +17,14 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
     context.read<HomeCubit>().getBooksListByCategory(category: "All");
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +44,16 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 const HomeTopBar(),
                 verticalSpace(16),
-                 SearchBarWidget(onChanged: (String ) {  },),
+                GestureDetector(
+                  onTap: () {
+                    context.pushNamed(
+                      Routes.searchScreen,
+                    );
+                  },
+                  child: SearchBarWidget(
+                    enabled: false,
+                  ),
+                ),
                 verticalSpace(24),
                 CategoryList(),
                 verticalSpace(16),

@@ -21,6 +21,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(HomeState.bestSellerPaginationLoading());
     } else {
       emit(const HomeState.bestSellerLoading());
+    }
       final response = await _homeRepo.getHomeData(
           startIndex: bestSellerStartIndex);
       response.when(
@@ -36,7 +37,6 @@ class HomeCubit extends Cubit<HomeState> {
         },
       );
     }
-  }
 //getBookBtCategory
     void getBooksListByCategory(
         {required String category, bool fromPagination = false}) async {

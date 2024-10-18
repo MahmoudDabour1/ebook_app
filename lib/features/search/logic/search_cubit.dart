@@ -10,28 +10,35 @@ class SearchCubit extends Cubit<SearchState> {
 
   List<SearchBookItems?>? searchBooksList = [];
   int searchStartIndex = 0;
+  String searchQuery = '';
 
   void searchBooks({required String query, bool fromPagination = false}) async {
     if (fromPagination) {
       emit(SearchState.searchLoadingPagination());
     } else {
       emit(SearchState.searchLoading());
-      final response = await _searchRepo.searchBooks(
-        query: query,
-        startIndex: searchStartIndex,
-      );
-      response.when(
-        success: (searchBookResponseModel) {
-          if (searchBookResponseModel.items!.isNotEmpty) {
-            searchStartIndex += 10;
-            searchBooksList?.addAll(searchBookResponseModel.items ?? []);
-          }
-          emit(SearchState.searchSuccess(searchBooksList));
-        },
-        failure: (apiErrorModel) {
-          emit(SearchState.searchError(apiErrorModel));
-        },
-      );
     }
+    final response = await _searchRepo.searchBooks(
+      query: query,
+      startIndex: searchStartIndex,
+    );
+    response.when(
+      success: (searchBookResponseModel) {
+        if (searchBookResponseModel.items!.isNotEmpty) {
+          searchStartIndex += 10;
+          searchBooksList?.addAll(searchBookResponseModel.items ?? []);
+        }
+        emit(SearchState.searchSuccess(searchBooksList));
+      },
+      failure: (apiErrorModel) {
+        emit(SearchState.searchError(apiErrorModel));
+      },
+    );
+  }
+
+  void clearSearchResults() {
+    searchBooksList?.clear();
+    searchStartIndex = 0; // Reset the index if you want to start fresh
+    emit(SearchState.searchSuccess(searchBooksList)); // Emit updated state
   }
 }

@@ -26,7 +26,14 @@ class AppTextStyles{
     fontSize: 18.sp,
     color: ColorsManager.darkBlue,
     fontWeight: FontWeightHelper.bold,
-  );static TextStyle font16DarkBlueMedium = TextStyle(
+  );static TextStyle font24DarkBlueBold = TextStyle(
+    fontSize: 24.sp,
+    color: ColorsManager.darkBlue,
+    fontWeight: FontWeightHelper.bold,
+  );
+
+
+  static TextStyle font16DarkBlueMedium = TextStyle(
     fontSize: 16.sp,
     color: ColorsManager.darkBlue,
     fontWeight: FontWeightHelper.medium,

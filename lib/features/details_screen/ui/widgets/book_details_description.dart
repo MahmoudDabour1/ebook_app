@@ -7,7 +7,9 @@ import '../../../../core/theming/styles.dart';
 
 class BookDetailsDescription extends StatelessWidget {
   final BookDetailsResponseModel? bookDetailsResponseModel;
-  const BookDetailsDescription({super.key, required this.bookDetailsResponseModel});
+
+  const BookDetailsDescription(
+      {super.key, required this.bookDetailsResponseModel});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +24,9 @@ class BookDetailsDescription extends StatelessWidget {
           ),
           verticalSpace(8),
           Text(
-            bookDetailsResponseModel?.volumeInfo?.description??"Description",
-            style: AppTextStyles.font18DarkBlueBold,
+            bookDetailsResponseModel?.volumeInfo?.description ??
+                "No Description",
+            style: AppTextStyles.font18DarkBlueMedium,
           ),
         ],
       ),

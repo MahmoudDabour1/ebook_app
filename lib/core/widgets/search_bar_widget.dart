@@ -8,7 +8,7 @@ class SearchBarWidget extends StatelessWidget {
  final bool enabled;
  final void Function(String?)? onChanged;
 
-   const SearchBarWidget({super.key,  this.enabled = true, required this.onChanged});
+   const SearchBarWidget({super.key,  this.enabled = true,  this.onChanged});
   @override
   Widget build(BuildContext context) {
     return TextFormField(

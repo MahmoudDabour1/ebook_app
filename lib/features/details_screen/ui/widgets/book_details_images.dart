@@ -87,26 +87,38 @@ class BookDetailsImages extends StatelessWidget {
                 ),
                 verticalSpace(265),
                 Container(
-                  width: 295.w,
-                  height: 54.h,
+                  width: 300.w,
+                  height: 60.h,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12.r),
+                    border: Border.all(
+                      color: Colors.grey[300]!,
+                    ),
                   ),
-                  child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          bookDetailsResponseModel.volumeInfo?.publisher??"publisher",
-                          style: AppTextStyles.font14DarkGrayBold,
-                        ),
-                        horizontalSpace(8),
-                        Text(
-                          "(${bookDetailsResponseModel.volumeInfo?.pageCount} pages)",
-                          style: AppTextStyles.font14DarkGrayBold,
-                        ),
-                      ]),
+                  child: Expanded(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            width: 180.w,
+                            child: Text(
+                              bookDetailsResponseModel.volumeInfo?.publisher??"Publisher Name",
+                              style: AppTextStyles.font14DarkGrayBold,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                            ),
+                          ),
+                          horizontalSpace(8),
+                          Text("|",style: TextStyle(fontWeight:FontWeight.bold ),),
+                          Text(
+                            "(${bookDetailsResponseModel.volumeInfo?.pageCount} Pages)",
+                            style: AppTextStyles.font14DarkGrayBold,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        ]),
+                  ),
                 ),
 
               ],

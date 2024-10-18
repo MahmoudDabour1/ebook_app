@@ -43,7 +43,6 @@ class BooksByCategoryResponseShimmerLoading extends StatelessWidget {
                       enabled: true,
                       child: Text(
                         "title",
-
                         style: AppTextStyles.font18DarkBlueBold,
                       ),
                     ),

@@ -10,16 +10,16 @@ class BestSellerShimmerLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      crossAxisCount: 2,
-      crossAxisSpacing: 16.w,
-      mainAxisSpacing: 16.h,
-      childAspectRatio: 1 / 1.8,
-      children: List.generate(
-        10,
-        (index) => Container(
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 16.w,
+        mainAxisSpacing: 16.h,
+        childAspectRatio: 1 / 1.8,
+      ),
+      itemCount: 10,
+      itemBuilder: (context, index) {
+        return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
           ),
@@ -75,8 +75,8 @@ class BestSellerShimmerLoading extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

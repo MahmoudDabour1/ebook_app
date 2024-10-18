@@ -5,8 +5,9 @@ class BookDetailsResponseModel {
   final String? id;
   final VolumeInfo? volumeInfo;
   final SaleInfo? saleInfo;
+  final AccessInfo? accessInfo;
 
-  BookDetailsResponseModel({this.id, this.volumeInfo, this.saleInfo,});
+  BookDetailsResponseModel( {this.id, this.volumeInfo, this.saleInfo,this.accessInfo,});
   factory BookDetailsResponseModel.fromJson(Map<String, dynamic> json) =>
       _$BookDetailsResponseModelFromJson(json);
 }
@@ -47,6 +48,33 @@ class VolumeInfo {
 
   factory VolumeInfo.fromJson(Map<String, dynamic> json) =>
       _$VolumeInfoFromJson(json);
+}
+
+@JsonSerializable()
+class AccessInfo {
+  final String? country;
+  final String? viewability;
+  final bool? embeddable;
+  final bool? publicDomain;
+  final String? textToSpeechPermission;
+  final Pdf? pdf;
+  final String? webReaderLink;
+  final String? accessViewStatus;
+  final bool? quoteSharingAllowed;
+
+  AccessInfo({
+    this.country,
+    this.viewability,
+    this.embeddable,
+    this.publicDomain,
+    this.textToSpeechPermission,
+    this.pdf,
+    this.webReaderLink,
+    this.accessViewStatus,
+    this.quoteSharingAllowed,
+  });
+  factory AccessInfo.fromJson(Map<String, dynamic> json) =>
+      _$AccessInfoFromJson(json);
 }
 
 @JsonSerializable()
@@ -106,4 +134,16 @@ class ImageLinks {
 
   factory ImageLinks.fromJson(Map<String, dynamic> json) =>
       _$ImageLinksFromJson(json);
+}
+
+@JsonSerializable()
+class Pdf {
+  final String? downloadLink;
+  final bool? isAvailable;
+
+  Pdf({
+    this.downloadLink,
+    this.isAvailable,
+  });
+  factory Pdf.fromJson(Map<String, dynamic> json) => _$PdfFromJson(json);
 }

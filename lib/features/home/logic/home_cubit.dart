@@ -22,67 +22,51 @@ class HomeCubit extends Cubit<HomeState> {
     } else {
       emit(const HomeState.bestSellerLoading());
     }
-      final response = await _homeRepo.getHomeData(
-          startIndex: bestSellerStartIndex);
-      response.when(
-        success: (homeBooksResponseModel) {
-          if (homeBooksResponseModel.items!.isNotEmpty) {
-            bestSellerStartIndex = bestSellerStartIndex + 10;
-            bestSellerList?.addAll(homeBooksResponseModel.items ?? []);
-          }
-          emit(HomeState.bestSellerSuccess(bestSellerList));
-        },
-        failure: (apiErrorModel) {
-          emit(HomeState.bestSellerError(apiErrorModel));
-        },
-      );
-    }
+    final response =
+        await _homeRepo.getHomeData(startIndex: bestSellerStartIndex);
+    response.when(
+      success: (homeBooksResponseModel) {
+        if (homeBooksResponseModel.items!.isNotEmpty) {
+          bestSellerStartIndex = bestSellerStartIndex + 10;
+          bestSellerList?.addAll(homeBooksResponseModel.items ?? []);
+        }
+        emit(HomeState.bestSellerSuccess(bestSellerList));
+      },
+      failure: (apiErrorModel) {
+        emit(HomeState.bestSellerError(apiErrorModel));
+      },
+    );
+  }
+
 //getBookBtCategory
-    void getBooksListByCategory(
-        {required String category, bool fromPagination = false}) async {
-      if (category != currentCategory) {
-        selectByCategoryStartIndex = 0;
-        booksByCategoriesList = [];
-        currentCategory = category;
-      }
-      if (fromPagination) {
-        emit(HomeState.bookByCategoryPaginationLoading());
-      } else {
+  void getBooksListByCategory(
+      {required String category, bool fromPagination = false}) async {
+    if (category != currentCategory) {
+      selectByCategoryStartIndex = 0;
+      booksByCategoriesList = [];
+      currentCategory = category;
+    }
+    if (fromPagination) {
+      emit(HomeState.bookByCategoryPaginationLoading());
+    } else {
       emit(const HomeState.bookByCategoryLoading());
     }
-      final response = await _homeRepo.getBooksByCategoryData(
-        category: category,
-        startIndex: selectByCategoryStartIndex,
-      );
-      response.when(
-        success: (bookByCategoryResponseModel) {
-          if (bookByCategoryResponseModel.items!.isNotEmpty) {
-            selectByCategoryStartIndex = selectByCategoryStartIndex + 10;
-            booksByCategoriesList
-                ?.addAll(bookByCategoryResponseModel.items ?? []);
-          }
-          emit(HomeState.bookByCategorySuccess(booksByCategoriesList));
-        },
-        failure: (apiErrorModel) {
-          emit(HomeState.bookByCategoryError(apiErrorModel));
-        },
-      );
-    }
+    final response = await _homeRepo.getBooksByCategoryData(
+      category: category,
+      startIndex: selectByCategoryStartIndex,
+    );
+    response.when(
+      success: (bookByCategoryResponseModel) {
+        if (bookByCategoryResponseModel.items!.isNotEmpty) {
+          selectByCategoryStartIndex = selectByCategoryStartIndex + 10;
+          booksByCategoriesList
+              ?.addAll(bookByCategoryResponseModel.items ?? []);
+        }
+        emit(HomeState.bookByCategorySuccess(booksByCategoriesList));
+      },
+      failure: (apiErrorModel) {
+        emit(HomeState.bookByCategoryError(apiErrorModel));
+      },
+    );
   }
-// void getFilterCategoriesList({required String category}) async {
-//   emit(const HomeState.bestSellerLoading());
-//   List<BookItems?>? filterCategoriesList = getBooksListByCategory(category);
-//   final response = await _homeRepo.getHomeData();
-//   response.when(
-//     success: (homeBooksResponseModel) {
-//       emit(HomeState.filterCategoriesSuccess(homeBooksResponseModel.items));
-//     },
-//     failure: (apiErrorModel) {
-//       emit(HomeState.filterCategoriesError());
-//     },
-//   );
-// }
-//
-// getBooksListByCategory( category) {
-//   return bestSellerList?.firstWhere((element) => element?.volumeInfo?.categories?[0] == category)?.filterCategoriesList;
-// }
+}

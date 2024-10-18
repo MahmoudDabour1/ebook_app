@@ -1,4 +1,6 @@
+import 'package:ebook_app/core/helpers/spacing.dart';
 import 'package:ebook_app/features/home/logic/home_cubit.dart';
+import 'package:ebook_app/features/home/ui/widgets/select_by_category/books_by_category_response_shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,13 +19,14 @@ class BooksBestSellerBlocBuilder extends StatelessWidget {
             current is BestSellerError ||
             current is BestSellerLoading,
         builder: (context, state) {
+          HomeCubit cubit = BlocProvider.of(context);
           return state.maybeWhen(
             bestSellerSuccess: (bestSellerDataList) {
               var bestSellerList = bestSellerDataList;
               return setupSuccess(bestSellerList);
             },
             bestSellerError: (errorHandler) => setupError(),
-            bestSellerLoading: () => setupLoading(),
+            bookByCategoryLoading: () => setupLoading(),
             orElse: () => const SizedBox.shrink(),
           );
         });
@@ -40,6 +43,6 @@ class BooksBestSellerBlocBuilder extends StatelessWidget {
   }
 
   Widget setupLoading() {
-    return const BestSellerShimmerLoading();
+    return const  BestSellerShimmerLoading();
   }
 }

@@ -23,40 +23,45 @@ class LinksButtons extends StatelessWidget {
         ),
         verticalSpace(16),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ButtonLinkItem(
-              title: "Preview Link",
-              onTap: () async {
-                Uri url = Uri.parse(
-                    bookDetailsResponseModel?.volumeInfo?.previewLink ??
-                        "https://www.google.com");
-                if (await canLaunchUrl(url)) {
-                  await launchUrl(
-                    url,
-                    mode: LaunchMode.externalApplication,
-                  );
-                } else {
-                  throw 'Could not launch $url';
-                }
-              },
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: ButtonLinkItem(
+                  title: "Preview Link",
+                  onTap: () async {
+                    Uri url = Uri.parse(
+                        bookDetailsResponseModel?.volumeInfo?.previewLink ??
+                            "https://www.google.com");
+                    if (await canLaunchUrl(url)) {
+                      await launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                ),
+              ),
             ),
-            bookDetailsResponseModel?.saleInfo?.buyLink==null? ButtonLinkItem(
-              title: "Buy Link",
-              onTap: () async {
-                Uri url = Uri.parse(
-                    bookDetailsResponseModel?.saleInfo?.buyLink ??
-                        "https://www.google.com");
-                if (await canLaunchUrl(url)) {
-                  await launchUrl(
-                    url,
-                    mode: LaunchMode.externalApplication,
-                  );
-                } else {
-                  throw 'Could not launch $url';
-                }
-              },
+            bookDetailsResponseModel?.saleInfo?.buyLink==null? Expanded(
+              child: ButtonLinkItem(
+                title: "Buy Link",
+                onTap: () async {
+                  Uri url = Uri.parse(
+                      bookDetailsResponseModel?.saleInfo?.buyLink ??
+                          "https://www.google.com");
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(
+                      url,
+                      mode: LaunchMode.externalApplication,
+                    );
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                },
+              ),
             ):SizedBox.shrink(),
           ],
         ),

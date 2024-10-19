@@ -1,5 +1,6 @@
 import 'package:ebook_app/core/di/dependency_injection.dart';
 import 'package:ebook_app/core/routing/routes.dart';
+import 'package:ebook_app/features/bottom_nav_bar_widget.dart';
 import 'package:ebook_app/features/details_screen/logic/book_details_cubit.dart';
 import 'package:ebook_app/features/details_screen/ui/details_screen.dart';
 import 'package:ebook_app/features/home/logic/home_cubit.dart';
@@ -13,6 +14,10 @@ import '../../features/search/ui/search_screen.dart';
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.bottomNavBarWidget:
+        return MaterialPageRoute(
+          builder: (context) => BottomNavBarWidget(),
+        );
       case Routes.homeScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(

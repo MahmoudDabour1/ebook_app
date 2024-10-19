@@ -41,35 +41,33 @@ class _CategoryResponseListViewState extends State<CategoryResponseListView> {
           }
           return true;
         },
-        child: Expanded(
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.booksItemsByCategory.length + 1,
-            itemBuilder: (context, index) {
-              if (index < widget.booksItemsByCategory.length) {
-                return GestureDetector(
-                  onTap: () {
-                    log("Book ID: ${widget.booksItemsByCategory[index]?.id}");
-                    Navigator.pushNamed(
-                      context,
-                      Routes.detailsScreen,
-                      arguments: widget.booksItemsByCategory[index]?.id,
-                    );
-                  },
-                  child: CategoryResponseListViewItem(
-                    itemIndex: index,
-                    bookItemsByCategory: widget.booksItemsByCategory[index],
-                  ),
-                );
-              } else {
-                return SizedBox(
-                  height: 50,
-                  width: 50,
-                  child: Center(child: CircularProgressIndicator()),
-                );
-              }
-            },
-          ),
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: widget.booksItemsByCategory.length + 1,
+          itemBuilder: (context, index) {
+            if (index < widget.booksItemsByCategory.length) {
+              return GestureDetector(
+                onTap: () {
+                  log("Book ID: ${widget.booksItemsByCategory[index]?.id}");
+                  Navigator.pushNamed(
+                    context,
+                    Routes.detailsScreen,
+                    arguments: widget.booksItemsByCategory[index]?.id,
+                  );
+                },
+                child: CategoryResponseListViewItem(
+                  itemIndex: index,
+                  bookItemsByCategory: widget.booksItemsByCategory[index],
+                ),
+              );
+            } else {
+              return SizedBox(
+                height: 50,
+                width: 50,
+                child: Center(child: CircularProgressIndicator()),
+              );
+            }
+          },
         ),
       ),
     );

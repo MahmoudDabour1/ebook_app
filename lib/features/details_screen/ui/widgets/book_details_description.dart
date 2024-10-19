@@ -26,7 +26,7 @@ class BookDetailsDescription extends StatelessWidget {
           LinksButtons(
             bookDetailsResponseModel: bookDetailsResponseModel,
           ),
-          Center(child: Text("-------------------------------------",style: AppTextStyles.font16DarkBlueSemiBold,)),
+          Center(child: Text("-------------------------------------------",style: AppTextStyles.font16DarkBlueSemiBold,)),
           Text(
             "Description: ",
             style: AppTextStyles.font18DarkBlueBold,

@@ -1,4 +1,5 @@
 import 'package:ebook_app/features/search/ui/widgets/search_response_list_view_item.dart';
+import 'package:ebook_app/features/search/ui/widgets/search_shimmer_loading_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -49,11 +50,7 @@ class _SearchResponseListViewState extends State<SearchResponseListView> {
                 ),
               );
             } else {
-              return SizedBox(
-                height: 50,
-                width: 50,
-                child: Center(child: CircularProgressIndicator()),
-              );
+              return SearchShimmerLoadingItem();
             }
           }),
     );

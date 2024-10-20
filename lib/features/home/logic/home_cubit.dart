@@ -38,7 +38,7 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-//getBookBtCategory
+  //getBookBtCategory
   void getBooksListByCategory(
       {required String category, bool fromPagination = false}) async {
     if (category != currentCategory) {

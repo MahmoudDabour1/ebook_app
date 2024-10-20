@@ -1,12 +1,14 @@
 import 'dart:developer';
 
 import 'package:ebook_app/core/routing/routes.dart';
+import 'package:ebook_app/features/home/ui/widgets/best_seller/best_seller_shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../data/models/home_books_response_model.dart';
 import '../../../logic/home_cubit.dart';
+import 'best_seller_shimmer_loading_item.dart';
 import 'books_best_seller_item.dart';
 
 class BooksBestSellerList extends StatefulWidget {
@@ -61,11 +63,7 @@ class _BooksBestSellerListState extends State<BooksBestSellerList> {
             ),
           );
         } else {
-          return SizedBox(
-            height: 50,
-            width: 50,
-            child: Center(child: CircularProgressIndicator()),
-          );
+          return BestSellerShimmerLoadingItem();
         }
       },
     );

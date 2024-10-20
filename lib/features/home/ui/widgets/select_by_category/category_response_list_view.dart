@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/routing/routes.dart';
+import 'book_by_category_shimmer_loading_item.dart';
 import 'category_response_list_view_item.dart';
 
 class CategoryResponseListView extends StatefulWidget {
@@ -61,11 +62,7 @@ class _CategoryResponseListViewState extends State<CategoryResponseListView> {
                 ),
               );
             } else {
-              return SizedBox(
-                height: 50,
-                width: 50,
-                child: Center(child: CircularProgressIndicator()),
-              );
+              return BookByCategoryShimmerLoadingItem();
             }
           },
         ),

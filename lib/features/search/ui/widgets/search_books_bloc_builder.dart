@@ -1,4 +1,5 @@
 import 'package:ebook_app/features/search/ui/widgets/search_response_list_view.dart';
+import 'package:ebook_app/features/search/ui/widgets/search_shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,7 +45,7 @@ class SearchBooksBlocBuilder extends StatelessWidget {
   }
 
   Widget setupLoading() {
-    return Center(child: const CircularProgressIndicator());
+    return SearchShimmerLoading();
   }
 
   Widget setupPaginationLoading() {

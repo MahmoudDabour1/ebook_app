@@ -42,18 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const HomeTopBar(),
-              verticalSpace(16),
-              GestureDetector(
-                onTap: () {
-                  context.pushNamed(
-                    Routes.searchScreen,
-                  );
-                },
-                child: SearchBarWidget(
-                  enabled: false,
-                ),
-              ),
-              verticalSpace(24),
               CategoryList(),
               verticalSpace(16),
               BooksByCategoryBlocBuilder(),

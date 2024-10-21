@@ -4,6 +4,7 @@ import 'package:ebook_app/features/bottom_nav_bar_widget.dart';
 import 'package:ebook_app/features/details_screen/logic/book_details_cubit.dart';
 import 'package:ebook_app/features/details_screen/ui/details_screen.dart';
 import 'package:ebook_app/features/home/logic/home_cubit.dart';
+import 'package:ebook_app/features/on_boarding/ui/on_boarding_screen.dart';
 import 'package:ebook_app/features/search/logic/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +15,10 @@ import '../../features/search/ui/search_screen.dart';
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.onBoardingScreen:
+        return MaterialPageRoute(
+          builder: (context) => OnBoardingScreen(),
+        );
       case Routes.bottomNavBarWidget:
         return MaterialPageRoute(
           builder: (context) => BottomNavBarWidget(),

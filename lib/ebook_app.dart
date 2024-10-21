@@ -32,7 +32,7 @@ class EbookApp extends StatelessWidget {
             scaffoldBackgroundColor: Colors.white,
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.bottomNavBarWidget,
+          initialRoute: Routes.onBoardingScreen,
         ),
       ),
     );

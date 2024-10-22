@@ -1,8 +1,12 @@
+import 'package:ebook_app/core/theming/logic/app_theme_cubit.dart';
+import 'package:ebook_app/core/theming/logic/app_theme_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/styles.dart';
 
 class BookByCategoryShimmerLoadingItem extends StatelessWidget {
@@ -10,6 +14,8 @@ class BookByCategoryShimmerLoadingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = context.watch<AppThemeCubit>();
+    final isDarkTheme = themeCubit.state is AppThemeDark;
     return Padding(
       padding: EdgeInsetsDirectional.only(
         start: 10.w,
@@ -18,8 +24,13 @@ class BookByCategoryShimmerLoadingItem extends StatelessWidget {
         height: 200.h,
         width: 150.w,
         decoration: BoxDecoration(
-          color: Colors.grey[100],
           borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(
+            style: BorderStyle.solid,
+            color: isDarkTheme
+                ? ColorsManager.moreDarkGray
+                : ColorsManager.containerGrayColor,
+          ),
         ),
         child: Column(
           children: [
@@ -30,7 +41,9 @@ class BookByCategoryShimmerLoadingItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(12.r),
-                  color: Colors.grey[100],
+                  color: isDarkTheme
+                      ? ColorsManager.moreDarkGray
+                      : Colors.grey[100],
                 ),
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ebook_app/core/theming/logic/app_theme_cubit.dart';
 import 'package:ebook_app/features/home/data/repos/home_repo.dart';
 import 'package:ebook_app/features/home/logic/home_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -27,5 +28,7 @@ Future<void> setupGetIt() async {
   //search
   getIt.registerLazySingleton<SearchRepo>(() => SearchRepo(getIt()));
   getIt.registerLazySingleton<SearchCubit>(() => SearchCubit(getIt()));
+//theme
+  getIt.registerFactory<AppThemeCubit>(()=>AppThemeCubit());
 
 }

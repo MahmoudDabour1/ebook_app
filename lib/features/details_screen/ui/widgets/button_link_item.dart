@@ -1,6 +1,11 @@
+import 'package:ebook_app/core/theming/colors.dart';
+import 'package:ebook_app/core/theming/logic/app_theme_state.dart';
 import 'package:ebook_app/core/theming/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/theming/logic/app_theme_cubit.dart';
 
 class ButtonLinkItem extends StatelessWidget {
   final String title;
@@ -10,16 +15,18 @@ class ButtonLinkItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = context.watch<AppThemeCubit>();
+    final isDarkTheme = themeCubit.state is AppThemeDark;
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child:Container(
         height: 60.h,
         decoration: BoxDecoration(
           color: Colors.blue,
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
-            color: Colors.black,
+            color: isDarkTheme?ColorsManager.white: Colors.black,
             width: 2.w,
           ),
         ),

@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:ebook_app/core/helpers/extensions.dart';
 import 'package:ebook_app/core/helpers/spacing.dart';
 import 'package:ebook_app/core/theming/colors.dart';
+import 'package:ebook_app/core/theming/logic/app_theme_cubit.dart';
+import 'package:ebook_app/core/theming/logic/app_theme_state.dart';
 import 'package:ebook_app/core/theming/styles.dart';
 import 'package:ebook_app/features/on_boarding/ui/widgets/custom_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/helpers/app_constants.dart';
@@ -24,6 +27,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = context.watch<AppThemeCubit>();
+    final isDarkTheme = themeCubit.state is AppThemeDark;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -48,12 +53,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   AnimatedPositioned(
                     left: _isOut
                         ? MediaQuery.of(context).size.width + 100
-                        : MediaQuery.of(context).size.width * 0.24,
+                        : MediaQuery.of(context).size.width * 0.25,
                     duration: Duration(milliseconds: 200),
                     child: Text(
                       textAlign: TextAlign.center,
                       AppConstants.titles[index],
-                      style: AppTextStyles.font24DarkBlueBold,
+                      style: AppTextStyles.font24DarkBlueBold.copyWith(
+                        color:
+                            isDarkTheme ? Colors.white : ColorsManager.darkBlue,
+                      ),
                     ),
                   ),
                 ],
@@ -99,7 +107,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   GestureDetector(
                     child: Text(
                       index == 2 ? "Register" : "Skip",
-                      style: AppTextStyles.font18DarkBlueBold,
+                      style: AppTextStyles.font18DarkBlueBold.copyWith(
+                        color: isDarkTheme
+                            ? ColorsManager.white
+                            : ColorsManager.darkBlue,
+                      ),
                     ),
                   ),
                   GestureDetector(
@@ -115,20 +127,23 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           }
                         });
                       });
-                      if (index==2) {
+                      if (index == 2) {
                         context.pushNamed(Routes.bottomNavBarWidget);
                       }
                     },
                     child: Container(
                       padding: EdgeInsets.all(15.r),
                       decoration: BoxDecoration(
-                        color: ColorsManager.darkBlue,
+                        color:
+                            isDarkTheme ? Colors.white : ColorsManager.darkBlue,
                         borderRadius: BorderRadius.circular(30.r),
                       ),
                       child: Text(
                         index == 2 ? "Finish" : "Next",
                         style: AppTextStyles.font18DarkBlueBold.copyWith(
-                          color: Colors.white,
+                          color: isDarkTheme
+                              ? ColorsManager.darkBlue
+                              : ColorsManager.white,
                         ),
                       ),
                     ),

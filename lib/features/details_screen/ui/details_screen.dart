@@ -8,7 +8,6 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.lighterGray,
       body: SafeArea(
         child: SingleChildScrollView(child: BookDetailsBlocBuilder()),
       ),

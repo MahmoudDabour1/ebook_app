@@ -1,10 +1,13 @@
+import 'package:ebook_app/core/theming/colors.dart';
+import 'package:ebook_app/core/theming/logic/app_theme_cubit.dart';
+import 'package:ebook_app/core/theming/logic/app_theme_state.dart';
 import 'package:ebook_app/features/home/logic/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/helpers/app_constants.dart';
-import '../../../../../core/helpers/constants.dart';
+import '../../../../../core/helpers/shared_pref_keys.dart';
 import '../../../../../core/helpers/shared_pref_helper.dart';
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/styles.dart';
@@ -22,13 +25,17 @@ class _CategoryListState extends State<CategoryList> {
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = context.watch<AppThemeCubit>();
+    final isDarkTheme = themeCubit.state is AppThemeDark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Select by Category",
-          style: AppTextStyles.font18DarkBlueBold,
-        ),
+      Text(
+      "Select by Category",
+      style: AppTextStyles.font18DarkBlueBold.copyWith(
+        color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
+      ),
+    ),
         verticalSpace(16),
         SizedBox(
           height: 45.h,

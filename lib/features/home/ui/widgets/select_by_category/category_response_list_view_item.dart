@@ -1,6 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ebook_app/core/theming/colors.dart';
+import 'package:ebook_app/core/theming/logic/app_theme_cubit.dart';
+import 'package:ebook_app/core/theming/logic/app_theme_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -14,14 +18,16 @@ class CategoryResponseListViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = context.watch<AppThemeCubit>();
+    final isDarkTheme = themeCubit.state is AppThemeDark;
     return  Padding(
       padding: EdgeInsetsDirectional.only(
         start: itemIndex == 0 ? 0 : 10.w,
       ),
-      child: Container(
+      child:Container(
         width: 150.w,
         decoration: BoxDecoration(
-          color: Colors.grey[100],
+          color:isDarkTheme?ColorsManager.moreDarkGray: ColorsManager.containerGrayColor,
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: Column(
@@ -40,7 +46,6 @@ class CategoryResponseListViewItem extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(12.r),
-                      color: Colors.white,
                     ),
                   ),
                 );
@@ -60,7 +65,9 @@ class CategoryResponseListViewItem extends StatelessWidget {
             ),
             Text(
               bookItemsByCategory?.volumeInfo?.title??"title",
-              style: AppTextStyles.font18DarkBlueBold,
+              style: AppTextStyles.font18DarkBlueBold.copyWith(
+                color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
+              ),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             ),
@@ -71,7 +78,9 @@ class CategoryResponseListViewItem extends StatelessWidget {
                 children: [
                   Text(
                     "${bookItemsByCategory?.volumeInfo?.pageCount} Pages",
-                    style: AppTextStyles.font16DarkBlueSemiBold,
+                    style: AppTextStyles.font16DarkBlueSemiBold.copyWith(
+                      color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
+                    ),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),

@@ -25,10 +25,7 @@ class AppRouter {
         );
       case Routes.homeScreen:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => HomeCubit(getIt())..getBestSellerList(),
-                  child: HomeScreen(),
-                ));
+            builder: (context) => HomeScreen());
       case Routes.detailsScreen:
         final bookId = settings.arguments as String;
 
@@ -40,9 +37,7 @@ class AppRouter {
                 ));
       case Routes.searchScreen:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-              create: (context) => SearchCubit(getIt()),
-              child: SearchScreen()),
+          builder: (context) => SearchScreen(),
         );
       default:
         return null;

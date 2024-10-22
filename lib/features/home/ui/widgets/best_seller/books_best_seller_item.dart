@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ebook_app/core/theming/logic/app_theme_cubit.dart';
+import 'package:ebook_app/core/theming/logic/app_theme_state.dart';
 import 'package:ebook_app/features/home/data/models/home_books_response_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../../core/helpers/spacing.dart';
@@ -15,10 +18,12 @@ class BooksBestSellerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = context.watch<AppThemeCubit>();
+    final isDarkTheme = themeCubit.state is AppThemeDark;
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
-          color: ColorsManager.lighterGray),
+        borderRadius: BorderRadius.circular(12.r),
+        color: isDarkTheme?ColorsManager.moreDarkGray: ColorsManager.containerGrayColor,),
       child: Column(
         children: [
           CachedNetworkImage(
@@ -57,14 +62,18 @@ class BooksBestSellerItem extends StatelessWidget {
           verticalSpace(8),
           Text(
             bookItems?.volumeInfo?.title ?? 'Book Title',
-            style: AppTextStyles.font16DarkBlueMedium,
+            style: AppTextStyles.font16DarkBlueMedium.copyWith(
+              color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
+            ),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ),
           verticalSpace(4),
           Text(
             bookItems?.volumeInfo?.authors?[0] ?? 'Author Name',
-            style: AppTextStyles.font12DarkBlueRegular,
+            style: AppTextStyles.font12DarkBlueRegular.copyWith(
+              color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
+            ),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ),
@@ -76,7 +85,9 @@ class BooksBestSellerItem extends StatelessWidget {
               children: [
                 Text(
                   '${bookItems?.saleInfo?.retailPrice?.amount ?? 'Free'} ${bookItems?.saleInfo?.retailPrice?.currencyCode ?? ''}',
-                  style: AppTextStyles.font16DarkBlueSemiBold,
+                  style: AppTextStyles.font16DarkBlueSemiBold.copyWith(
+                    color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
+                  ),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),

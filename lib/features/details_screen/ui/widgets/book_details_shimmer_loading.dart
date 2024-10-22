@@ -1,8 +1,12 @@
 import 'package:ebook_app/core/helpers/spacing.dart';
+import 'package:ebook_app/core/theming/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../../../../core/theming/logic/app_theme_cubit.dart';
+import '../../../../core/theming/logic/app_theme_state.dart';
 import '../../../../core/theming/styles.dart';
 
 class BooKDetailsShimmerLoading extends StatelessWidget {
@@ -10,6 +14,8 @@ class BooKDetailsShimmerLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = context.watch<AppThemeCubit>();
+    final isDarkTheme = themeCubit.state is AppThemeDark;
     return Column(
       children: [
         SizedBox(
@@ -23,7 +29,7 @@ class BooKDetailsShimmerLoading extends StatelessWidget {
                   height: 400.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12.r),
-                    color: Colors.grey[100],
+
                   ),
                 ),
               ),
@@ -55,12 +61,12 @@ class BooKDetailsShimmerLoading extends StatelessWidget {
                         "Author Name",
                         style: AppTextStyles.font14DarkGrayRegular,
                       ),
-                      verticalSpace(265),
+                      verticalSpace(295),
                       Container(
                         width: 295.w,
                         height: 54.h,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color:isDarkTheme?ColorsManager.moreDarkGray: Colors.white,
                           borderRadius: BorderRadius.circular(12.r),
                         ),
                         child: Row(

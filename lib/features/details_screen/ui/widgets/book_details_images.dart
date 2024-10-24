@@ -1,9 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ebook_app/core/theming/logic/app_theme_cubit.dart';
+import 'package:ebook_app/core/theming/logic/app_theme_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/helpers/spacing.dart';
+import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 import '../../data/models/book_details_response_model.dart';
 
@@ -14,13 +18,17 @@ class BookDetailsImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = context.watch<AppThemeCubit>();
+    final isDarkTheme = themeCubit.state is AppThemeDark;
     return SizedBox(
       height: 427.h,
       width: double.infinity,
-      child: Stack(
+      child:Stack(
         children: [
           CachedNetworkImage(
-            imageUrl:bookDetailsResponseModel.volumeInfo?.imageLinks?.thumbnail?? "https://picsum.photos/200/300",
+            imageUrl: bookDetailsResponseModel
+                .volumeInfo?.imageLinks?.thumbnail ??
+                "https://picsum.photos/200/300",
             width: double.infinity,
             height: 400.h,
             fit: BoxFit.fill,
@@ -48,8 +56,7 @@ class BookDetailsImages extends StatelessWidget {
                 ),
               ),
             ),
-            errorWidget: (context, url, error) =>
-            const Icon(Icons.error),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
           Container(
             width: double.infinity,
@@ -57,7 +64,9 @@ class BookDetailsImages extends StatelessWidget {
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                  color: Colors.white.withOpacity(0.7),
+                  color: isDarkTheme
+                      ? Colors.black.withOpacity(0.7)
+                      : Colors.white.withOpacity(0.7),
                   spreadRadius: 1,
                   blurRadius: 5,
                   offset: const Offset(0, 3),
@@ -71,10 +80,13 @@ class BookDetailsImages extends StatelessWidget {
               children: [
                 verticalSpace(16),
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 16.0.w),
+                  padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                   child: Text(
-                    bookDetailsResponseModel.volumeInfo?.title??"Book Title",
-                    style: AppTextStyles.font20DarkBlueMedium,
+                    bookDetailsResponseModel.volumeInfo?.title ??
+                        "Book Title",
+                    style: AppTextStyles.font20DarkBlueMedium.copyWith(
+                      color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
+                    ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
@@ -82,44 +94,68 @@ class BookDetailsImages extends StatelessWidget {
                 ),
                 verticalSpace(8),
                 Text(
-                  bookDetailsResponseModel.volumeInfo?.authors?[0]??"Author Name",
-                  style: AppTextStyles.font14DarkGrayRegular,
+                  bookDetailsResponseModel.volumeInfo?.authors?[0] ??
+                      "Author Name",
+                  style: AppTextStyles.font14DarkGrayRegular.copyWith(
+                    color: isDarkTheme ? ColorsManager.lightGray : ColorsManager.darkBlue,
+                  ),
                 ),
                 verticalSpace(265),
                 Container(
-                  width: 295.w,
-                  height: 54.h,
+                  width: 300.w,
+                  height: 60.h,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: isDarkTheme?ColorsManager.moreDarkGray:ColorsManager.white,
                     borderRadius: BorderRadius.circular(12.r),
+                    border: Border.all(
+                      color:isDarkTheme?ColorsManager.containerGrayColor: Colors.grey[300]!,
+                    ),
                   ),
-                  child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          bookDetailsResponseModel.volumeInfo?.publisher??"publisher",
-                          style: AppTextStyles.font14DarkGrayBold,
-                        ),
-                        horizontalSpace(8),
-                        Text(
-                          "(${bookDetailsResponseModel.volumeInfo?.pageCount} pages)",
-                          style: AppTextStyles.font14DarkGrayBold,
-                        ),
-                      ]),
+                  child: Expanded(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            width: 180.w,
+                            child: Text(
+                              bookDetailsResponseModel
+                                  .volumeInfo?.publisher ??
+                                  "Publisher Name",
+                              style: AppTextStyles.font14DarkGrayBold.copyWith(
+                                color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                            ),
+                          ),
+                          horizontalSpace(8),
+                          Text(
+                            "|",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            "(${bookDetailsResponseModel.volumeInfo?.pageCount} Pages)",
+                            style: AppTextStyles.font14DarkGrayBold.copyWith(
+                              color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        ]),
+                  ),
                 ),
-
               ],
             ),
           ),
           Center(
             child: CachedNetworkImage(
-              imageUrl:bookDetailsResponseModel.volumeInfo?.imageLinks?.large?? "https://picsum.photos/200/300",
+              imageUrl:
+              bookDetailsResponseModel.volumeInfo?.imageLinks?.large ??
+                  "https://picsum.photos/200/300",
               width: 170.w,
               height: 220.h,
               fit: BoxFit.fill,
-              progressIndicatorBuilder:
-                  (context, url, downloadProgress) {
+              progressIndicatorBuilder: (context, url, downloadProgress) {
                 return Shimmer.fromColors(
                   baseColor: Colors.grey[300]!,
                   highlightColor: Colors.grey[100]!,
@@ -143,8 +179,7 @@ class BookDetailsImages extends StatelessWidget {
                   ),
                 ),
               ),
-              errorWidget: (context, url, error) =>
-              const Icon(Icons.error),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
         ],

@@ -1,7 +1,14 @@
+import 'package:ebook_app/core/theming/colors.dart';
+import 'package:ebook_app/core/theming/logic/app_theme_cubit.dart';
+import 'package:ebook_app/core/theming/logic/app_theme_state.dart';
+import 'package:ebook_app/features/home/logic/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/helpers/app_constants.dart';
+import '../../../../../core/helpers/shared_pref_keys.dart';
+import '../../../../../core/helpers/shared_pref_helper.dart';
 import '../../../../../core/helpers/spacing.dart';
 import '../../../../../core/theming/styles.dart';
 import 'category_list_item.dart';
@@ -14,17 +21,21 @@ class CategoryList extends StatefulWidget {
 }
 
 class _CategoryListState extends State<CategoryList> {
-  var selectCategoryIndex = 0;
+  int selectCategoryIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = context.watch<AppThemeCubit>();
+    final isDarkTheme = themeCubit.state is AppThemeDark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Select by Category",
-          style: AppTextStyles.font18DarkBlueBold,
-        ),
+      Text(
+      "Select by Category",
+      style: AppTextStyles.font18DarkBlueBold.copyWith(
+        color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
+      ),
+    ),
         verticalSpace(16),
         SizedBox(
           height: 45.h,
@@ -34,12 +45,15 @@ class _CategoryListState extends State<CategoryList> {
             itemBuilder: (context, index) {
               return Padding(
                 padding:
-                    EdgeInsetsDirectional.only(start: index == 0 ? 0 : 8.w),
+                EdgeInsetsDirectional.only(start: index == 0 ? 0 : 8.w),
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
                       selectCategoryIndex = index;
                     });
+                    SharedPrefHelper.setData(SharedPrefKeys.saveCategory, AppConstants.selectByCategory[index].toString());
+                    context.read<HomeCubit>().getBooksListByCategory(
+                        category: AppConstants.selectByCategory[index]);
                   },
                   child: CategoryListItem(
                     index: index,

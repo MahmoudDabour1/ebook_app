@@ -5,6 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/helpers/helper_methods.dart';
+import '../../../../core/theming/logic/app_theme_cubit.dart';
+import '../../../../core/theming/logic/app_theme_state.dart';
 import '../../../favorite/logic/favorite_state.dart';
 
 class BookDetailsHeartButton extends StatelessWidget {
@@ -14,6 +17,8 @@ class BookDetailsHeartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = context.watch<AppThemeCubit>();
+    final isDarkTheme = themeCubit.state is AppThemeDark;
     return BlocBuilder<FavoriteCubit, FavoriteState>(
       builder: (context, state) {
         final isFavorite = state.maybeWhen(
@@ -26,8 +31,10 @@ class BookDetailsHeartButton extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             if (isFavorite) {
+              showToast("Added to removed successfully", isDarkTheme);
               context.read<FavoriteCubit>().removeFavorite(book.id.toString());
             } else {
+              showToast("Added to favorites successfully", isDarkTheme);
               context.read<FavoriteCubit>().addFavorite(book);
             }
           },

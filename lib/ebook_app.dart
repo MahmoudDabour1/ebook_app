@@ -5,6 +5,7 @@ import 'package:ebook_app/features/search/logic/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'core/helpers/theme_enums.dart';
 import 'core/routing/app_router.dart';
@@ -48,6 +49,7 @@ class EbookApp extends StatelessWidget {
               title: 'Ebook App',
               onGenerateRoute: appRouter.generateRoute,
               theme: theme,
+              builder: FToastBuilder(),
               debugShowCheckedModeBanner: false,
               initialRoute: Routes.onBoardingScreen,
             );

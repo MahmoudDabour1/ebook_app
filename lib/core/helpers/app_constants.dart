@@ -1,3 +1,4 @@
+const String kBookItemBox = 'bookItemBox';
 class AppConstants {
   static List<String> selectByCategory = [
     'All',
@@ -25,4 +26,6 @@ class AppConstants {
     "assets/images/on_boarding2.png",
     "assets/images/on_boarding3.png",
   ];
+
+
 }

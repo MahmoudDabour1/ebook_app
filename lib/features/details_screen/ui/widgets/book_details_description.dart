@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
+import 'book_details_heart_button.dart';
 import 'links_buttons.dart';
 
 class BookDetailsDescription extends StatelessWidget {
@@ -20,49 +21,50 @@ class BookDetailsDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeCubit = context.watch<AppThemeCubit>();
     final isDarkTheme = themeCubit.state is AppThemeDark;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Print Type: ${bookDetailsResponseModel?.volumeInfo?.printType ?? "No Print Type"}",
-          style: AppTextStyles.font18DarkBlueBold.copyWith(
-            color: isDarkTheme
-                ? ColorsManager.white
-                : ColorsManager.darkBlue,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          verticalSpace(10),
+          BookDetailsHeartButton(
+            book: bookDetailsResponseModel!,
           ),
-        ),
-        LinksButtons(
-          bookDetailsResponseModel: bookDetailsResponseModel,
-        ),
-        Center(
-          child: Text(
-            "-------------------------------------------",
-            style: AppTextStyles.font16DarkBlueSemiBold.copyWith(
-              color: isDarkTheme
-                  ? ColorsManager.white
-                  : ColorsManager.darkBlue,
+          verticalSpace(10),
+          Text(
+            "Print Type: ${bookDetailsResponseModel?.volumeInfo?.printType ?? "No Print Type"}",
+            style: AppTextStyles.font18DarkBlueBold.copyWith(
+              color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
             ),
           ),
-        ),
-        Text(
-          "Description: ",
-          style: AppTextStyles.font18DarkBlueBold.copyWith(
-            color: isDarkTheme
-                ? ColorsManager.white
-                : ColorsManager.darkBlue,
+          LinksButtons(
+            bookDetailsResponseModel: bookDetailsResponseModel,
           ),
-        ),
-        verticalSpace(8),
-        Text(
-          bookDetailsResponseModel?.volumeInfo?.description ??
-              "No Description",
-          style: AppTextStyles.font18DarkBlueMedium.copyWith(
-            color: isDarkTheme
-                ? ColorsManager.white
-                : ColorsManager.darkBlue,
+          Center(
+            child: Text(
+              "-------------------------------------------",
+              style: AppTextStyles.font16DarkBlueSemiBold.copyWith(
+                color:
+                    isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
+              ),
+            ),
           ),
-        ),
-      ],
+          Text(
+            "Description: ",
+            style: AppTextStyles.font18DarkBlueBold.copyWith(
+              color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
+            ),
+          ),
+          verticalSpace(8),
+          Text(
+            bookDetailsResponseModel?.volumeInfo?.description ??
+                "No Description",
+            style: AppTextStyles.font18DarkBlueMedium.copyWith(
+              color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/di/dependency_injection.dart';
+import 'features/favorite/data/hive_init.dart';
 
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   setupGetIt();
   await ScreenUtil.ensureScreenSize();
+  await initHive();
   runApp(EbookApp(
     appRouter: AppRouter(),
   ));

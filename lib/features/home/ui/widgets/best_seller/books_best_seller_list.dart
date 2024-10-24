@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:ebook_app/core/routing/routes.dart';
-import 'package:ebook_app/features/home/ui/widgets/best_seller/best_seller_shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

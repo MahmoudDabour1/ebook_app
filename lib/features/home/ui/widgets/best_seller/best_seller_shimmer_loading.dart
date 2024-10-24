@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../../../core/helpers/spacing.dart';
 import 'best_seller_shimmer_loading_item.dart';
 
 class BestSellerShimmerLoading extends StatelessWidget {

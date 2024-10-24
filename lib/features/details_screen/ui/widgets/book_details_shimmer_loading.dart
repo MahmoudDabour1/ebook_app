@@ -8,6 +8,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/theming/logic/app_theme_cubit.dart';
 import '../../../../core/theming/logic/app_theme_state.dart';
 import '../../../../core/theming/styles.dart';
+import 'button_link_item.dart';
 
 class BooKDetailsShimmerLoading extends StatelessWidget {
   const BooKDetailsShimmerLoading({super.key});
@@ -17,6 +18,7 @@ class BooKDetailsShimmerLoading extends StatelessWidget {
     final themeCubit = context.watch<AppThemeCubit>();
     final isDarkTheme = themeCubit.state is AppThemeDark;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           height: 427.h,
@@ -29,7 +31,6 @@ class BooKDetailsShimmerLoading extends StatelessWidget {
                   height: 400.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12.r),
-
                   ),
                 ),
               ),
@@ -66,7 +67,9 @@ class BooKDetailsShimmerLoading extends StatelessWidget {
                         width: 295.w,
                         height: 54.h,
                         decoration: BoxDecoration(
-                          color:isDarkTheme?ColorsManager.moreDarkGray: Colors.white,
+                          color: isDarkTheme
+                              ? ColorsManager.moreDarkGray
+                              : Colors.white,
                           borderRadius: BorderRadius.circular(12.r),
                         ),
                         child: Row(
@@ -101,10 +104,32 @@ class BooKDetailsShimmerLoading extends StatelessWidget {
             ],
           ),
         ),
+        verticalSpace(10),
+        Skeletonizer(
+          enabled: true,
+          child: Center(
+            child: Container(
+              width: 60.w,
+              height: 50.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        verticalSpace(8),
         Skeletonizer(
           enabled: true,
           child: Text(
-            "Description",
+            "Print Type: Book",
             style: AppTextStyles.font18DarkBlueBold,
           ),
         ),
@@ -112,7 +137,56 @@ class BooKDetailsShimmerLoading extends StatelessWidget {
         Skeletonizer(
           enabled: true,
           child: Text(
-            "Description",
+            "Links: ",
+            style: AppTextStyles.font18DarkBlueBold,
+          ),
+        ),
+        verticalSpace(16),
+        Skeletonizer(
+          enabled: true,
+          child: Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: ButtonLinkItem(
+                    isShimmer: true,
+                    title: "Preview Link",
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ButtonLinkItem(
+                  isShimmer:  true,
+                  title: "Buy Link",
+                  onTap: () async {},
+                ),
+              ),
+            ],
+          ),
+        ),
+        verticalSpace(8),
+        Skeletonizer(
+          enabled: true,
+          child: ButtonLinkItem(
+            isShimmer: true,
+            title: "Pdf Download Link",
+            onTap: () async {},
+          ),
+        ),
+        verticalSpace(16),
+        Skeletonizer(
+          enabled: true,
+          child: Text(
+            "Description Description",
+            style: AppTextStyles.font18DarkBlueBold,
+          ),
+        ),
+        verticalSpace(8),
+        Skeletonizer(
+          enabled: true,
+          child: Text(
+            "Description Description",
             style: AppTextStyles.font18DarkBlueBold,
           ),
         ),

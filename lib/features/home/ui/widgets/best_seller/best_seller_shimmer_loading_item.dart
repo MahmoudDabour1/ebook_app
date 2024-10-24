@@ -1,6 +1,5 @@
 import 'package:ebook_app/core/theming/logic/app_theme_cubit.dart';
 import 'package:ebook_app/core/theming/logic/app_theme_state.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -54,24 +53,8 @@ class BestSellerShimmerLoadingItem extends StatelessWidget {
           verticalSpace(8),
           Skeletonizer(
             enabled: true,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '${'0'} ${'USD'}',
-                  ),
-                  CupertinoButton(
-                    padding: EdgeInsets.zero,
-                    child: Icon(
-                      CupertinoIcons.heart_fill,
-                      color: Colors.red,
-                    ),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
+            child: Text(
+              '${'0'} ${'USD'}',
             ),
           ),
         ],

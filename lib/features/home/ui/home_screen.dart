@@ -1,7 +1,4 @@
-import 'package:ebook_app/core/helpers/extensions.dart';
 import 'package:ebook_app/core/helpers/spacing.dart';
-import 'package:ebook_app/core/routing/routes.dart';
-import 'package:ebook_app/core/widgets/search_bar_widget.dart';
 import 'package:ebook_app/features/home/logic/home_cubit.dart';
 import 'package:ebook_app/features/home/ui/widgets/best_seller/books_best_seller.dart';
 import 'package:ebook_app/features/home/ui/widgets/home_top_bar.dart';

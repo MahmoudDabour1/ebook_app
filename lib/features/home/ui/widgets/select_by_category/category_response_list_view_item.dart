@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebook_app/core/theming/colors.dart';
 import 'package:ebook_app/core/theming/logic/app_theme_cubit.dart';
 import 'package:ebook_app/core/theming/logic/app_theme_state.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -69,31 +68,16 @@ class CategoryResponseListViewItem extends StatelessWidget {
                 color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
               ),
               overflow: TextOverflow.ellipsis,
-              maxLines: 1,
+              textAlign: TextAlign.center,
+              maxLines: 2,
             ),
-            Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 8.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "${bookItemsByCategory?.volumeInfo?.pageCount} Pages",
-                    style: AppTextStyles.font16DarkBlueSemiBold.copyWith(
-                      color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                  CupertinoButton(
-                    padding: EdgeInsets.zero,
-                    child: Icon(
-                      CupertinoIcons.heart_fill,
-                      color: Colors.red,
-                    ),
-                    onPressed: () {},
-                  ),
-                ],
+            Text(
+              "${bookItemsByCategory?.volumeInfo?.pageCount} Pages",
+              style: AppTextStyles.font16DarkBlueSemiBold.copyWith(
+                color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
               ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
 
           ],

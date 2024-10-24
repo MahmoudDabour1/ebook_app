@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebook_app/core/theming/logic/app_theme_cubit.dart';
 import 'package:ebook_app/core/theming/logic/app_theme_state.dart';
 import 'package:ebook_app/features/home/data/models/home_books_response_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -77,30 +76,14 @@ class BooksBestSellerItem extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ),
-
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '${bookItems?.saleInfo?.retailPrice?.amount ?? 'Free'} ${bookItems?.saleInfo?.retailPrice?.currencyCode ?? ''}',
-                  style: AppTextStyles.font16DarkBlueSemiBold.copyWith(
-                    color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
-                CupertinoButton(
-                  padding: EdgeInsets.zero,
-                  child: Icon(
-                    CupertinoIcons.heart_fill,
-                    color: Colors.red,
-                  ),
-                  onPressed: () {},
-                ),
-              ],
+          verticalSpace(10),
+          Text(
+            '${bookItems?.saleInfo?.retailPrice?.amount ?? 'Free'} ${bookItems?.saleInfo?.retailPrice?.currencyCode ?? ''}',
+            style: AppTextStyles.font16DarkBlueSemiBold.copyWith(
+              color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
             ),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
           ),
         ],
       ),

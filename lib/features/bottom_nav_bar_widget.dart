@@ -1,6 +1,6 @@
 import 'package:ebook_app/core/theming/colors.dart';
+import 'package:ebook_app/features/favorite/ui/favorite_screen.dart';
 import 'package:ebook_app/features/home/ui/home_screen.dart';
-import 'package:ebook_app/features/search/ui/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,11 +16,11 @@ class BottomNavBarWidget extends StatefulWidget {
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   int currentIndex = 0;
 
-  List<String> title = ['Home', 'Search'];
+  List<String> title = ['Home', 'Favorite'];
 
-  List<IconData> icons = [Icons.home, Icons.search];
+  List<IconData> icons = [Icons.home, Icons.favorite];
 
-  final pages = [const HomeScreen(), const SearchScreen()];
+  final pages = [const HomeScreen(), const FavoriteScreen()];
 
   @override
   Widget build(BuildContext context) {

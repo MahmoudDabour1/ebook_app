@@ -10,8 +10,9 @@ import '../../../../core/theming/logic/app_theme_cubit.dart';
 class ButtonLinkItem extends StatelessWidget {
   final String title;
   final void Function()? onTap;
+  final bool isShimmer;
 
-  const ButtonLinkItem({super.key, required this.title, this.onTap});
+  const ButtonLinkItem({super.key, required this.title, this.onTap,this.isShimmer=false});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class ButtonLinkItem extends StatelessWidget {
       child:Container(
         height: 60.h,
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color:isShimmer?Colors.transparent: Colors.blue,
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(

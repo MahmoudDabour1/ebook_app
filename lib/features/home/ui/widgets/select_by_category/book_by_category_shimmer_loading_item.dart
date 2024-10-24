@@ -1,11 +1,10 @@
+import 'package:ebook_app/core/helpers/spacing.dart';
 import 'package:ebook_app/core/theming/logic/app_theme_cubit.dart';
 import 'package:ebook_app/core/theming/logic/app_theme_state.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/styles.dart';
 
@@ -50,30 +49,16 @@ class BookByCategoryShimmerLoadingItem extends StatelessWidget {
             Skeletonizer(
               enabled: true,
               child: Text(
-                "title",
+                "Author Name",
                 style: AppTextStyles.font18DarkBlueBold,
+                maxLines: 2,
               ),
             ),
+            verticalSpace(8),
             Skeletonizer(
               enabled: true,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Pages",
-                    ),
-                    CupertinoButton(
-                      padding: EdgeInsets.zero,
-                      child: Icon(
-                        CupertinoIcons.heart_fill,
-                        color: Colors.red,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
+              child: Text(
+                "Pages",
               ),
             ),
           ],

@@ -1,3 +1,5 @@
+import 'package:ebook_app/core/helpers/extensions.dart';
+import 'package:ebook_app/core/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,8 +31,11 @@ class _ButtonsWidgetState extends State<ButtonsWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
+            onTap: (){
+              context.pushNamed(Routes.bottomNavBarWidget);
+            },
             child: Text(
-              widget.index == 2 ? "Register" : "Skip",
+               "Skip",
               style: AppTextStyles.font18DarkBlueBold.copyWith(
                 color:
                     isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,

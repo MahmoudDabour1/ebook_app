@@ -34,16 +34,22 @@ class _HomeScreenState extends State<HomeScreen> {
             20.0.w,
             28.0.h,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const HomeTopBar(),
-              CategoryList(),
-              verticalSpace(16),
-              BooksByCategoryBlocBuilder(),
-              verticalSpace(24),
-              Expanded(child: BooksBestSeller()),
-            ],
+          child: NestedScrollView(
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return [
+                SliverToBoxAdapter(child: const HomeTopBar()),
+                SliverToBoxAdapter(child: const CategoryList()),
+                SliverToBoxAdapter(
+                  child: verticalSpace(16),
+                ),
+                SliverToBoxAdapter(child: const BooksByCategoryBlocBuilder()),
+                SliverToBoxAdapter(
+                  child: verticalSpace(24),
+                ),
+              ];
+            },
+            body: BooksBestSeller(),
           ),
         ),
       ),

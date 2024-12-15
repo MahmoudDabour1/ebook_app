@@ -26,7 +26,7 @@ class _BooksBestSellerListState extends State<BooksBestSellerList> {
   void initState() {
     super.initState();
     scroll.addListener(
-      () {
+          () {
         if (scroll.position.maxScrollExtent == scroll.offset) {
           HomeCubit cubit = BlocProvider.of(context);
           cubit.getBestSellerList(fromPagination: true);
@@ -35,36 +35,45 @@ class _BooksBestSellerListState extends State<BooksBestSellerList> {
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
+    return  CustomScrollView(
       controller: scroll,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 16.w,
-        mainAxisSpacing: 16.h,
-        childAspectRatio: 1 / 1.8,
-      ),
-      itemCount: widget.bestSellerBooks.length + 2,
-      itemBuilder: (context, index) {
-        if (index < widget.bestSellerBooks.length) {
-          return GestureDetector(
-            onTap: () {
-              log("Book ID: ${widget.bestSellerBooks[index]?.id}");
-              Navigator.pushNamed(
-                context,
-                Routes.detailsScreen,
-                arguments: widget.bestSellerBooks[index]?.id,
-              );
+      shrinkWrap: true,
+      physics: ClampingScrollPhysics(),
+      slivers: [
+        SliverGrid(
+          delegate: SliverChildBuilderDelegate(
+                (context, index) {
+              if (index < widget.bestSellerBooks.length) {
+                return GestureDetector(
+                  onTap: () {
+                    log("Book ID: ${widget.bestSellerBooks[index]?.id}");
+                    Navigator.pushNamed(
+                      context,
+                      Routes.detailsScreen,
+                      arguments: widget.bestSellerBooks[index]?.id,
+                    );
+                  },
+                  child: BooksBestSellerItem(
+                    bookItems: widget.bestSellerBooks[index],
+                  ),
+                );
+              } else {
+                return const BestSellerShimmerLoadingItem();
+              }
             },
-            child: BooksBestSellerItem(
-              bookItems: widget.bestSellerBooks[index],
-            ),
-          );
-        } else {
-          return BestSellerShimmerLoadingItem();
-        }
-      },
+            childCount: widget.bestSellerBooks.length + 2,
+          ),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 16.w,
+            mainAxisSpacing: 16.h,
+            childAspectRatio: 1 / 1.8,
+          ),
+        ),
+      ],
     );
   }
 }

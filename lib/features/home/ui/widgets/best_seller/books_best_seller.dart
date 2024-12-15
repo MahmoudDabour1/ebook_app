@@ -17,15 +17,15 @@ class BooksBestSeller extends StatelessWidget {
     final isDarkTheme = themeCubit.state is AppThemeDark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [Text(
-      "Best Seller",
-      style: AppTextStyles.font18DarkBlueBold.copyWith(
-        color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
-      ),
-    ),
+      children: [
+        Text(
+          "Best Seller",
+          style: AppTextStyles.font18DarkBlueBold.copyWith(
+            color: isDarkTheme ? ColorsManager.white : ColorsManager.darkBlue,
+          ),
+        ),
         verticalSpace(16),
-        Expanded(child: const BooksBestSellerBlocBuilder()),
-        // Add your code here
+        Expanded(child: BooksBestSellerBlocBuilder())
       ],
     );
   }
